@@ -13,9 +13,9 @@ function isMobileDevice() {
     const layerBG = document.getElementById("layerBG");
     const layerCard = document.getElementById("layerCard");
   
-    // ------------------------------
+    // ----------------------------------------
     // 1. Efecto parallax en Desktop (mousemove)
-    // ------------------------------
+    // ----------------------------------------
     function handleMouseMove(e) {
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
@@ -32,16 +32,15 @@ function isMobileDevice() {
       layerCard.style.transform = `translateZ(0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     }
   
-    // Solo registramos mousemove si es Desktop
     if (!isMobileDevice()) {
+      // Solo en Desktop, usamos mousemove
       window.addEventListener("mousemove", handleMouseMove);
     }
   
-    // ------------------------------
-    // 2. Efecto parallax en Mobile por "touchmove" (por defecto)
-    // ------------------------------
+    // ----------------------------------------
+    // 2. Efecto parallax en Mobile (touchmove) por defecto
+    // ----------------------------------------
     function handleTouchMove(e) {
-      // Tomamos el primer dedo
       const touch = e.touches[0];
       if (!touch) return;
   
@@ -51,7 +50,7 @@ function isMobileDevice() {
       const diffX = touch.clientX - centerX;
       const diffY = touch.clientY - centerY;
   
-      const factor = 0.02; // Ajusta para más o menos sensibilidad
+      const factor = 0.02;
       const rotateY = diffX * factor;
       const rotateX = -diffY * factor;
   
@@ -59,23 +58,23 @@ function isMobileDevice() {
       layerCard.style.transform = `translateZ(0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     }
   
-    // Registramos touchmove si es Mobile
     if (isMobileDevice()) {
+      // Solo en Mobile, usamos touchmove
       window.addEventListener("touchmove", handleTouchMove, { passive: true });
     }
   
-    // ------------------------------
-    // 3. Parallax con sensores (deviceorientation)
-    //    Activado con un botón
-    // ------------------------------
+    // ----------------------------------------
+    // 3. Parallax con sensores (deviceorientation) - Toggle
+    // ----------------------------------------
     let orientationReceived = false;
-    let sensorTimeout = null; // Para controlar el tiempo de espera
+    let sensorTimeout = null;    
+    let sensorParallaxEnabled = false; // Estado del toggle
   
     function handleDeviceOrientation(event) {
       orientationReceived = true;
   
-      const beta = event.beta || 0;    // Inclinación frontal (rango -180 a 180)
-      const gamma = event.gamma || 0;  // Inclinación lateral (rango -90 a 90)
+      const beta = event.beta || 0;    // Inclinación frontal
+      const gamma = event.gamma || 0;  // Inclinación lateral
   
       const factor = 1.0;
       const rotateX = beta * factor;
@@ -85,41 +84,67 @@ function isMobileDevice() {
       layerCard.style.transform = `translateZ(0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     }
   
-    // Función para solicitar "parallax al movimiento"
     function enableSensorParallax() {
       console.log("Intentando activar parallax de movimiento...");
-  
-      // 1. Verificamos si es mobile
+      
       if (!isMobileDevice()) {
         alert("Esta función está diseñada para dispositivos móviles con sensor de movimiento.");
         return;
       }
   
-      // 2. Registramos el evento deviceorientation
       if (window.DeviceOrientationEvent) {
         window.addEventListener('deviceorientation', handleDeviceOrientation, true);
   
-        // Reseteamos bandera y creamos un timeout de 3s para comprobar si no llegan datos
         orientationReceived = false;
-        if (sensorTimeout) clearTimeout(sensorTimeout);
-  
+        // Creamos un timeout de 3s para comprobar si no llegan datos
         sensorTimeout = setTimeout(() => {
-          if (!orientationReceived) {
-            alert("No se reciben datos de orientación. Posiblemente tu navegador bloquee los sensores. Revisa configuraciones o intenta con Chrome.");
+          if (!orientationReceived && sensorParallaxEnabled) {
+            alert("No se reciben datos de orientación. Posiblemente tu navegador bloquee los sensores. Revisa configuraciones o usa Chrome.");
           }
         }, 3000);
   
+        sensorParallaxEnabled = true;      
       } else {
         alert("Este dispositivo/navegador no soporta DeviceOrientationEvent.");
       }
     }
   
-    // ------------------------------
-    // 4. Vinculamos el botón "Activar Parallax al Movimiento"
-    // ------------------------------
+    function disableSensorParallax() {
+      console.log("Desactivando parallax de movimiento...");
+      window.removeEventListener('deviceorientation', handleDeviceOrientation, true);
+  
+      // Si había un timeout en curso, lo limpiamos
+      if (sensorTimeout) {
+        clearTimeout(sensorTimeout);
+        sensorTimeout = null;
+      }
+      sensorParallaxEnabled = false;
+    }
+  
+    // Función toggle
+    function toggleSensorParallax() {
+      const sensorBtn = document.getElementById("activateSensorBtn");
+      if (!sensorBtn) return;
+  
+      if (!sensorParallaxEnabled) {
+        // Habilitar
+        enableSensorParallax();
+        if (sensorParallaxEnabled) {
+          sensorBtn.textContent = "Desactivar Parallax al Movimiento";
+        }
+      } else {
+        // Deshabilitar
+        disableSensorParallax();
+        sensorBtn.textContent = "Activar Parallax al Movimiento";
+      }
+    }
+  
+    // ----------------------------------------
+    // 4. Vinculamos el botón
+    // ----------------------------------------
     const sensorBtn = document.getElementById("activateSensorBtn");
     if (sensorBtn) {
-      sensorBtn.addEventListener("click", enableSensorParallax);
+      sensorBtn.addEventListener("click", toggleSensorParallax);
     } else {
       console.warn("No se encontró el botón #activateSensorBtn en el HTML.");
     }
