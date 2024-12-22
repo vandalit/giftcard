@@ -1,0 +1,47 @@
+/* css/style.css */
+
+/* Video de fondo */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2; /* Detrás de todo */
+  }
+  
+  /* Contenedor con perspectiva 3D */
+  .giftcard-perspective {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    perspective: 1000px; /* Ajusta para mayor/menor profundidad */
+    overflow: hidden;
+  }
+  
+  /* Cada capa en 3D */
+  .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.05s ease-out;
+  }
+  
+  /* Capa de fondo */
+  .layer-bg {
+    background: rgba(255,255,255,0.1);
+    z-index: -1;
+  }
+  
+  /* Capa principal donde va la giftcard */
+  .layer-card {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
