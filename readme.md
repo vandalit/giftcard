@@ -144,8 +144,6 @@ bash
 Copy code
 https://tudominio.com/giftcard?id=16&token=abc123
 
-En este caso:
-https://vandalit.github.io/giftcard?id=16&token=abc123
 ```
 
 El usuario que tenga esa URL podrá ver la giftcard (si coincide el `token`).
