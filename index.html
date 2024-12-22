@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Giftcard Syzygy</title>
+    <!-- Tailwind CSS desde CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- Archivo de estilos opcionales -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+
+    <!-- Contenedor principal -->
+    <div id="app" class="max-w-xl w-full p-4">
+      <!-- Sección de error (oculta por defecto, se mostrará vía JS) -->
+      <section
+        id="errorSection"
+        class="hidden bg-red-800 bg-opacity-50 p-6 rounded-md shadow-md text-center"
+      >
+        <h1 class="text-2xl font-bold mb-4">Giftcard no disponible</h1>
+        <p class="mb-4">
+          La URL es incorrecta o la giftcard no existe. <br/>
+          Verifica tus datos o contáctanos.
+        </p>
+        <a
+          href="https://syzygy.metamedia.cl"
+          class="inline-block px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md"
+        >
+          Ir a Syzygy
+        </a>
+      </section>
+
+      <!-- Sección de giftcard (oculta por defecto, se mostrará vía JS) -->
+      <section
+        id="giftcardSection"
+        class="hidden bg-gray-800 p-6 rounded-md shadow-md flex flex-col items-center"
+      >
+        <!-- Fondo / Imagen de giftcard -->
+        <div
+          id="giftcardImage"
+          class="w-full h-48 rounded-md mb-4 bg-center bg-cover"
+        ></div>
+
+        <!-- Contenido principal de la giftcard -->
+        <div class="w-full text-center">
+          <h2
+            id="nickname"
+            class="text-2xl font-bold mb-2"
+          >
+            <!-- Se completa por JS -->
+          </h2>
+          <p id="comment" class="mb-4 text-gray-200">
+            <!-- Se completa por JS -->
+          </p>
+          <!-- Emisor - Receptor -->
+          <div class="mb-4">
+            <p id="emitter" class="italic"></p>
+            <p id="receiver" class="italic"></p>
+          </div>
+        </div>
+
+        <!-- Botón de canje (o lo que quieras) -->
+        <button
+          id="redeemButton"
+          class="mt-4 px-4 py-2 rounded-md text-white"
+        >
+          Canjear Giftcard
+        </button>
+
+        <!-- Extra data -->
+        <p
+          id="extraValue"
+          class="mt-6 text-sm text-gray-400"
+        >
+          <!-- Se completa por JS -->
+        </p>
+      </section>
+    </div>
+
+    <!-- Archivo JS con la lógica -->
+    <script src="./js/app.js"></script>
+  </body>
+</html>

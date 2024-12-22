@@ -1,0 +1,29 @@
+{
+    "16": {
+      "token": "abc123",
+      "emitterName": "Juan Pérez",
+      "receiverName": "María López",
+      "nickname": "Super Marca",
+      "comment": "¡Gracias por tu apoyo! Te mereces esto y mucho más.",
+      "bgImage": "https://via.placeholder.com/600x300?text=Fondo+Giftcard",
+      "colors": {
+        "primary": "#ec4899",
+        "secondary": "#14b8a6"
+      },
+      "extraValue": "¡Felices Fiestas y próspero 2024!"
+    },
+    "17": {
+      "token": "xyz789",
+      "emitterName": "Carlos R.",
+      "receiverName": "Equipo Marketing",
+      "nickname": "Killer Team",
+      "comment": "¡A brillar en el 2024!",
+      "bgImage": "https://via.placeholder.com/600x300?text=Fondo+Tarjeta",
+      "colors": {
+        "primary": "#eab308",
+        "secondary": "#db2777"
+      },
+      "extraValue": "¡Vamos con todo!"
+    }
+}
+  
