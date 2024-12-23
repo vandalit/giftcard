@@ -23,7 +23,7 @@ export function initParallax() {
     const diffY = e.clientY - centerY;
 
     // Factor de sensibilidad en Desktop
-    const factor = 0.01; 
+    const factor = 0.04; 
     const rotateY = diffX * factor; 
     const rotateX = -diffY * factor;
 
@@ -50,7 +50,7 @@ export function initParallax() {
     const diffY = touch.clientY - centerY;
 
     // Factor de sensibilidad en Mobile (arrastre con dedo)
-    const factor = 0.02;
+    const factor = 0.2;
     const rotateY = diffX * factor;
     const rotateX = -diffY * factor;
 
@@ -81,7 +81,7 @@ export function initParallax() {
     }
 
     // Factor de sensibilidad con giroscopio
-    const factor = 1.0;
+    const factor = 0.5;
     const rotateX = beta * factor;
     const rotateY = gamma * factor;
 
