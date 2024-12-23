@@ -50,7 +50,7 @@ function isMobileDevice() {
       const diffX = touch.clientX - centerX;
       const diffY = touch.clientY - centerY;
   
-      const factor = 0.04;
+      const factor = 0.06;
       const rotateY = diffX * factor;
       const rotateX = -diffY * factor;
   
