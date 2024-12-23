@@ -76,7 +76,7 @@ function isMobileDevice() {
       const beta = event.beta || 0;    // Inclinación frontal
       const gamma = event.gamma || 0;  // Inclinación lateral
   
-      const factor = 1.0;
+      const factor = 0.5;
       const rotateX = beta * factor;
       const rotateY = gamma * factor;
   
