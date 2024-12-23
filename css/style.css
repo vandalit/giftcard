@@ -45,3 +45,9 @@
     justify-content: center;
   }
   
+  /* A partir de 768px (desktop en adelante), oculta el botón */
+@media (min-width: 768px) {
+  #activateSensorBtn {
+    display: none !important;
+  }
+}
